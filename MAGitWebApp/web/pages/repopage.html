@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MAGitHub repo page</title>
+
+    <!-- Bootstrap -->
+    <link href="../common/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../common/css/bootstrapValidator.css" rel="stylesheet">
+
+    <link href="repopage.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
+        <div class="col-sm-6"><span id="reponame" style="font-weight: bold; font-size: 22px;">reponame</span></h2>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2" style="font-size: 18px">Hello <span id="username">username</span>!
+        </div>
+        <div class="col-sm-2">
+            <form id="logout" name="logout" method="GET" action="logout">
+                <input type="submit" value="Logout"/>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Notifications</div>
+        <div class="panel-body" style="overflow-y: scroll; height: 100px" id="notifications_area"></div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Branches</div>
+        <!-- Table -->
+        <table class="table" id="branches_table">
+            <thead>
+            <tr>
+                <th>Branch name</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            </tbody>
+        </table>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-default" id="checkout-btn">Checkout</button>
+            <button type="button" class="btn btn-default" id="pull-btn">Pull</button>
+            <button type="button" class="btn btn-default" id="push-btn">Push</button>
+        </div>
+    </div>
+    <form action="branch_form" enctype="multipart/form-data" method="POST" id="branch_form" name="branch_form">
+        <div class="form-group">
+            <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">
+                        <div style="font-weight: bold">New branch: </div>
+                    </span>
+                <input type="text" name="branch_name" id="branch_name" style="height: 48px; padding: 12px; background: white" class="form-control input-group-addon" placeholder="New branch name" aria-describedby="basic-addon1" >
+                <span class="input-group-addon">
+                        <button type="submit" class="btn btn-default">Create</button>
+                    </span>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Head Branch Commits</div>
+        <!-- Table -->
+        <table class="table" id="head_commits_table">
+            <thead>
+            <tr>
+                <th>SHA-1</th>
+                <th>Message</th>
+                <th>Date</th>
+                <th>Author</th>
+                <th>Branches</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Selected Commit Content</div>
+        <!-- Table -->
+        <table class="table" id="selected_commit_files_table">
+            <thead>
+            <tr>
+                <th>File name</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <form action="commit" enctype="multipart/form-data" method="POST" id="commit" name="commit_form">
+        <div class="form-group">
+            <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2">
+                        <div style="font-weight: bold">Commit message: </div>
+                    </span>
+                <input type="text" name="commit_message" id="commit_message" style="height: 48px; padding: 12px; background: white" class="form-control input-group-addon" placeholder="commit message" aria-describedby="basic-addon2" >
+                <span class="input-group-addon">
+                        <button type="submit" class="btn btn-default">Commit</button>
+                    </span>
+            </div>
+        </div>
+    </form>
+    <div class="panel-footer">
+        <button type="button" class="btn btn-default" id="wc-btn" onclick="javascript: window.location.href = 'wcpage.html'">Go to working copy editor</button>
+        <button type="button" class="btn btn-default" id="pr-btn" onclick="javascript:$('#pr_dialog').modal('show');">
+            Create Pull Request
+        </button>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Pull Requests</div>
+        <!-- Table -->
+        <table class="table" id="pr_table">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>Target Branch</th>
+                <th>Base Branch</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            </tbody>
+        </table>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-default" id="view-btn">View</button>
+            <button type="button" class="btn btn-default" id="approve-btn">Approve</button>
+            <form action="reject" method="POST" id="reject" name="reject_form">
+                <div class="form-group">
+                    <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon3">
+                        <div style="font-weight: bold">Reject Reason: </div>
+                    </span>
+                        <input type="text" name="reject_reason" id="reject_reason" style="height: 48px; padding: 12px; background: white" class="form-control input-group-addon" placeholder="reject reason" aria-describedby="basic-addon3" >
+                        <span class="input-group-addon">
+                        <button type="submit" class="btn btn-default">Reject</button>
+                    </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" tabindex="-1" id="pr_dialog" style="background: rgba(255, 0, 255, 0.05)">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form id="pr_form" name="pr_form">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="pr-header">
+                        Create A Pull Request
+                    </h4>
+                </div>
+                <div class="modal-body" style="padding-left: 0px;" id="pr-body">
+                    <div class="container-fluid">
+                        <div class="row form-group has-feedback">
+                            <label for="target_branch" class="col-sm-3 control-label form-label-text" style="text-align: right;">
+                                Target branch:
+                            </label>
+                            <div class="col-sm-9">
+                                <select id="target_branch" name="target_branch" class="form-control form-text">
+                                    <option value="">choose</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group has-feedback">
+                            <label for="base_branch" class="col-sm-3 control-label form-label-text" style="text-align: right;">
+                                Base branch:
+                            </label>
+                            <div class="col-sm-9">
+                                <select id="base_branch" name="base_branch" class="form-control form-text">
+                                    <option value="">choose</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group has-feedback">
+                            <label for="pr_message"  class="col-sm-3 control-label form-label-text" style="text-align: right;">
+                                Message:
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control form-text" name="pr_message" id="pr_message" placeholder="Message for the PR">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-default" id="submit-pr" value="Submit">
+                    <button type="button" class="btn btn-default">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="dialog-header"></h4>
+            </div>
+            <div class="modal-body" id="dialog-body">
+                <br/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../common/js/context-path-helper.js"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../common/js/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../common/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../common/js/bootstrapvalidator.js"></script>
+<script src="repopage.js"></script>
+</body>
+</html>

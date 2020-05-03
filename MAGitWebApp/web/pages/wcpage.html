@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MAGitHub working copy page</title>
+
+    <!-- Bootstrap -->
+    <link href="../common/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../common/css/bootstrapValidator.css" rel="stylesheet">
+
+    <link href="wcpage.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
+        <div class="col-sm-7"><span style="font-weight: bold; font-size: 30px;">Working Copy</span>
+        </div>
+        <div class="col-sm-2" style="font-size: 18px">Hello <span id="username">username</span>!
+        </div>
+        <div class="col-sm-3" style="text-align: right">
+            <table>
+                <tr>
+                    <td>
+                        <form id="back_to_repopage" name="back_to_repopage" method="GET" action="repopage.html">
+                            <input type="submit" value="Back to repo page"/>
+                        </form>
+                    </td>
+                    <td style="padding-left: 5px">
+                        <form id="logout" name="logout" method="GET" action="logout">
+                            <input type="submit" value="Logout"/>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--left side of the page-->
+<div class="container col-sm-4">
+    <!--WC Files table-->
+    <div style="border: #0f0f0f 1px solid">
+        <table class="table" id="files_table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Files</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td>shil</td></tr>
+            </tbody>
+        </table>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-default" id="delete-btn">delete</button>
+            <form action="createfile" style="padding-top: 5px" enctype="multipart/form-data" method="POST" id="create_file" name="create_file">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">
+                            <div style="font-weight: bold">File path: </div>
+                        </span>
+                        <input type="text" name="file_path" id="file_path" style="height: 48px; padding: 12px; background: white" class="form-control input-group-addon" placeholder="" aria-describedby="basic-addon1" >
+                        <span class="input-group-addon">
+                            <button type="submit" class="btn btn-default">Create</button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--end of WC Files table-->
+
+    <br/>
+
+    <div style="border: #0f0f0f 1px solid">
+        <!--wc status table-->
+        <table class="table" style=" margin: -1px;">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Working Copy Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <!--wc status deleted subtitle-->
+        <table class="table" id="deleted_table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Deleted</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <!--wc status updated subtitle-->
+        <table class="table" id="updated_table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Updated</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <!--wc status created subtitle-->
+        <table class="table" id="created_table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Created</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <!--end of wc status table-->
+    </div>
+
+</div>
+<!--end of left side of the page-->
+
+<!--right side of the page-->
+<div class="container col-sm-8">
+    <div>
+        <textarea readonly id="file_content" rows="20" cols="100">
+        </textarea>
+    </div>
+    <div class="panel-footer">
+        <button type="button" class="btn btn-default" id="save-btn">Save</button>
+        <button type="button" class="btn btn-default" id="edit-btn">Edit</button>
+        <form action="commit" style="padding-top: 5px" enctype="multipart/form-data" method="POST" id="commit" name="commit_form">
+            <div class="form-group">
+                <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon2">
+                            <div style="font-weight: bold">Commit message: </div>
+                        </span>
+                    <input type="text" name="commit_message" id="commit_message" style="height: 48px; padding: 12px; background: white" class="form-control input-group-addon" placeholder="commit message" aria-describedby="basic-addon2" >
+                    <span class="input-group-addon">
+                            <button type="submit" class="btn btn-default">Commit</button>
+                        </span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--end of right side of the page-->
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="dialog-header"></h4>
+            </div>
+            <div class="modal-body" id="dialog-body">
+                <br/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../common/js/context-path-helper.js"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../common/js/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../common/js/bootstrap.min.js"></script>
+<script src="wcpage.js"></script>
+
+</body>
+
+</html>

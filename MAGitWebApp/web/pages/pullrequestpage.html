@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MAGitHub pull request page</title>
+
+    <!-- Bootstrap -->
+    <link href="../common/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../common/css/bootstrapValidator.css" rel="stylesheet">
+
+    <link href="pullrequestpage.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row" style="margin-bottom: 20px; margin-top: 20px;">
+        <div class="col-sm-7"><span style="font-weight: bold; font-size: 25px;">Pull Request View</span>
+        </div>
+        <div class="col-sm-2" style="font-size: 18px">Hello <span id="username">username</span>!
+        </div>
+        <div class="col-sm-3" style="text-align: right">
+            <table>
+                <tr>
+                    <td>
+                        <form id="back_to_repopage" name="back_to_repopage" method="GET" action="repopage.html">
+                            <input type="submit" value="Back to repo page"/>
+                        </form>
+                    </td>
+                    <td style="padding-left: 5px">
+                        <form id="logout" name="logout" method="GET" action="logout">
+                            <input type="submit" value="Logout"/>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--left side of the page-->
+<div class="container col-sm-6">
+    <div style="border: #0f0f0f 1px solid">
+        <!--files changes table-->
+        <table class="table" id="file_changes" style=" margin: -1px;">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Files Changes</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <!--files changes deleted subtitle-->
+        <table class="table" id="deleted_table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Deleted</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <!--files changes updated subtitle-->
+        <table class="table" id="updated_table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Updated</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <!--files changes created subtitle-->
+        <table class="table" id="created_table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Created</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <!--end of files changes table-->
+    </div>
+    <br/>
+    <!--commits table-->
+    <div style="border: #0f0f0f 1px solid">
+        <table class="table" style=" margin: -1px;">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Commits</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <table class="table" id="commits_table">
+            <thead class="thead-light">
+            <tr>
+                <th class='commit-col1'>SHA-1</th>
+                <th class='commit-col2'>Message</th>
+                <th class='commit-col3'>Date</th>
+                <th class='commit-col4'>Author</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <!--end of commits table-->
+</div>
+<!--end of left side of the page-->
+
+<!--right side of the page-->
+<div class="container col-sm-6">
+    <div>
+        <textarea readonly id="file_content" rows="20" cols="75">
+        </textarea>
+    </div>
+</div>
+<!--end of right side of the page-->
+
+</body>
+<script src="../common/js/context-path-helper.js"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../common/js/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../common/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../common/js/bootstrapvalidator.js"></script>
+<script src="pullrequestpage.js"></script>
+</html>

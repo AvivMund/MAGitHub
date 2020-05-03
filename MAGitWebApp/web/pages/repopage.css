@@ -1,0 +1,40 @@
+.branch-row-selected {
+    background : #ffc8f1
+}
+
+.branch-row {
+    background : #ffffff
+}
+
+.branch-row :hover {
+    cursor: pointer;
+}
+
+.commit-row-selected {
+    background : #ffc8f1
+}
+
+.commit-row {
+    background : #ffffff
+}
+
+.commit-row :hover {
+    cursor: pointer;
+}
+
+.file-row {
+    background : #ffffff
+}
+
+
+.pr-row-selected {
+    background : #ffc8f1
+}
+
+.pr-row {
+    background : #ffffff
+}
+
+.pr-row :hover {
+    cursor: pointer;
+}

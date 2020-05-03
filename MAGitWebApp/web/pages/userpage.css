@@ -1,0 +1,35 @@
+.user-row-online-selected {
+    background : #55aa55
+}
+
+.user-row-offline-selected {
+    background : #999999
+}
+
+.user-row-online {
+    background : #aaffaa
+}
+
+.user-row-offline {
+    background : #dddddd
+}
+
+.user-row-online :hover {
+    cursor: pointer;
+}
+
+.user-row-offline :hover {
+    cursor: pointer;
+}
+
+.repo-row-selected {
+    background : #ffc8f1
+}
+
+.repo-row {
+    background : #ffffff
+}
+
+.repo-row :hover {
+    cursor: pointer;
+}

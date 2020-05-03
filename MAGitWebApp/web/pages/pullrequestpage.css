@@ -1,0 +1,54 @@
+.thead-dark {
+    background : rgba(19, 21, 21, 0.83);
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.thead-light {
+    background : rgba(162, 162, 162, 0.83);
+    color: black;
+    text-align: center;
+    font-weight: bold;
+}
+
+.commit-row-selected {
+    background : #ffc8f1
+}
+
+.commit-row {
+    background : #ffffff
+}
+
+.commit-row :hover {
+    cursor: pointer;
+}
+
+
+.file-row-selected {
+    background : #ffc8f1
+}
+
+.file-row {
+    background : #ffffff
+}
+
+.file-row :hover {
+    cursor: pointer;
+}
+
+.commit-col1 {
+    word-break: break-all;
+}
+
+.commit-col2 {
+    word-wrap: break-word;
+}
+
+.commit-col3 {
+    word-wrap: break-word;
+}
+
+.commit-col4 {
+    word-wrap: break-word;
+}
